@@ -18,6 +18,9 @@ var cases = map[string][]string{
 	"(+ 12 (* 34 99))": []string{"(", "+", "12", "(", "*", "34", "99", ")", ")"},
 	";":                []string{},
 	"(display \"hello\")": []string{"(", "display", "\"hello\"", ")"},
+	`(+ 12
+	(* 2
+	3))`: []string{"(", "+", "12", "(", "*", "2", "3", ")", ")"},
 }
 
 func TestTokenizer(t *testing.T) {
