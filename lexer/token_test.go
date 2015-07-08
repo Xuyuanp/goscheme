@@ -15,6 +15,7 @@ func assertEqual(t *testing.T, actual, expected interface{}, args ...interface{}
 }
 
 var cases = map[string][]string{
+	"(+ 1 2)":          []string{"(", "+", "1", "2", ")"},
 	"(+ 12 (* 34 99))": []string{"(", "+", "12", "(", "*", "34", "99", ")", ")"},
 	";":                []string{},
 	"(display \"hello\")": []string{"(", "display", "\"hello\"", ")"},
@@ -30,7 +31,7 @@ func TestTokenizer(t *testing.T) {
 		for _, token := range tokens {
 			tok, err := tokenizer.Next()
 			assertEqual(t, err, nil)
-			assertEqual(t, tok, token)
+			assertEqual(t, tok.raw, token)
 		}
 		_, err := tokenizer.Next()
 		assertEqual(t, err, io.EOF)
